@@ -12,5 +12,4 @@ data class BindCellular(
     @SerializedName("image") val image: String,
     @SerializedName("description") val description: String,
     @SerializedName("lastPrice") val lastPrice: Int,
-    @SerializedName("credit") val credit: String
-)
+    @SerializedName("credit") val credit: Boolean)

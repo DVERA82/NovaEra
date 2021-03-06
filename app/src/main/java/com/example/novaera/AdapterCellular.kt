@@ -31,7 +31,7 @@ class AdapterCellular : RecyclerView.Adapter<AdapterCellular.CellularVH> () {
         RecyclerView.ViewHolder(binding.root), View.OnClickListener {
         fun bind(cellular: Cellular) {
             Glide.with(binding.ivImage)
-                .load(binding.ivImage)
+                .load(cellular.image)
                 .into(binding.ivImage)
             binding.tvName.text = cellular.name
             binding.tvPrice.text = cellular.price.toString()

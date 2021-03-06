@@ -15,11 +15,8 @@ class RepositoryCellular(private val dao: DaoCellular) {
         return listCellular
     }
 
-
-
-
     fun converterBindCellular(id: Int,name:String,price:Int,image:String,description: String,
-                             lastPrice:Int,credit: String): List<BindCellular> {
+                             lastPrice:Int,credit: Boolean): List<BindCellular> {
         val listBindCellular:MutableList<BindCellular>  = mutableListOf()
         listBindCellular.add(
             BindCellular(
@@ -29,7 +26,7 @@ class RepositoryCellular(private val dao: DaoCellular) {
                 image = image,
                 description= description,
                 lastPrice= lastPrice,
-                credit=credit))
+                credit= credit))
 
         return listBindCellular
     }
@@ -39,14 +36,14 @@ class RepositoryCellular(private val dao: DaoCellular) {
             val response = RetrofitCellular.retrofitInstance().fetchCellular()
             when (response.isSuccessful) {
                 true -> response.body()?.let {
-                    dao.InsertAllDaoCellular(converter(it.list))
+                    dao.InsertAllDaoCellular(it)
                 }
 
                 false -> Log.d("ERROR", " ${response.code()} : ${response.errorBody()}")
             }
 
         } catch (t: Throwable) {
-            Log.e("ERROR COROUTINA", t.message.toString())
+            Log.e("ERROR COROUTINA 1", t.message.toString())
         }
 
     }
@@ -57,14 +54,14 @@ class RepositoryCellular(private val dao: DaoCellular) {
             val response = RetrofitCellular.retrofitInstance().fetchBindCellular(id)
             when (response.isSuccessful) {
                 true -> response.body()?.let {
-                    dao.InsertBindCellular(converterBindCellular(it.id,it.name,it.price,it.image,
-                      it.description,it.lastPrice,it.credit ))
+                    dao.InsertBindCellular(converterBindCellular(id,it.name,it.price,it.image,
+                        it.description,it.lastPrice, it.credit))
                 }
                 false -> Log.d("ERROR", " ${response.code()} : ${response.errorBody()}")
             }
 
         } catch (t: Throwable) {
-            Log.e("ERROR COROUTINA", t.message.toString())
+            Log.e("ERROR COROUTINA 2", t.message.toString())
         }
 
 
@@ -72,8 +69,6 @@ class RepositoryCellular(private val dao: DaoCellular) {
 
     fun getBindDB (id: Int): LiveData<List<BindCellular>> = dao.getBindCellular(id)
 
-    suspend fun updateFavouriteCellular(cellular: Cellular) {
-        dao.updateCellular(cellular)
-    }
+
 
 }

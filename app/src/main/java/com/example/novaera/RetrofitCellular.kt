@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class RetrofitCellular {
     companion object{
-        private const val URL_BASE ="https://my-json-server.typicode.com/Himuravidal/FakeAPIdata/products/ "
+        private const val URL_BASE ="https://my-json-server.typicode.com/Himuravidal/FakeAPIdata/"
 
 
         fun retrofitInstance(): ApiCellular {

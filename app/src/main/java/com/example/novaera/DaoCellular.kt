@@ -17,7 +17,5 @@ interface DaoCellular {
     @Query("SELECT * FROM bind_table WHERE id = :id")
     fun getBindCellular(id:Int) : LiveData<List<BindCellular>>
 
-    @Update
-    suspend fun updateCellular(cellular: Cellular)
 
 }

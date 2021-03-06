@@ -26,8 +26,5 @@ class ViewModelCellular (application: Application): AndroidViewModel(application
         repository.getBindCellular(id)
     }
 
-    fun updateFavouriteCellular(cellular: Cellular) = viewModelScope.launch {
-        repository.updateFavouriteCellular(cellular)
 
-    }
 }

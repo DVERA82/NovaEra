@@ -41,14 +41,14 @@ class AdapterBindCellular : RecyclerView.Adapter<AdapterBindCellular.BindVH>() {
                 .load(bindCellular.image)
                 .into(binding.ivImage2)
 
-            binding.tvNameB.text= bindCellular.name
-            binding.tvPriceB.text= bindCellular.price.toString()
-            binding.tvLastPriceB.text= bindCellular.lastPrice.toString()
-            binding.tvDescription.text= bindCellular.description
-            binding.tvCredit.text= bindCellular.credit
+            binding.tvNameB.text = bindCellular.name
+            binding.tvPriceB.text = bindCellular.price.toString()
+            binding.tvLastPriceB.text = bindCellular.lastPrice.toString()
+            binding.tvDescription.text = bindCellular.description
 
-            itemView.setOnLongClickListener(this)
-
+            if (bindCellular.credit) {
+                binding.tvCredit.text = "ACEPTA CRÉDITO"
+            }
 
         }
 
