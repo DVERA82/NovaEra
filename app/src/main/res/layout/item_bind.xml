@@ -65,6 +65,7 @@
         android:layout_height="98dp"
         android:layout_marginStart="124dp"
         android:layout_marginTop="12dp"
+        android:background="#757575"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivImage2" />
 
