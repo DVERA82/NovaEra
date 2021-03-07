@@ -1,11 +1,15 @@
 package com.example.novaera
 
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -23,7 +27,7 @@ class SecondFragment : Fragment() {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
             idImage = requireArguments().getInt("LISTA")
-            name = requireArguments().getString("name", "")
+            name = requireArguments().getString("Title", "")
 
         }
     }
@@ -47,6 +51,29 @@ class SecondFragment : Fragment() {
                     adapter.update(it)
                 }
             })
+
+            binding.emailFab.setOnClickListener {
+                sendEmail()
+            }
+
         }
-    }
+            fun sendEmail() {
+                val para = arrayOf("info@novaera.cl")
+                val copia = arrayOf("")
+                val emailIntent = Intent(Intent.ACTION_SEND)
+                emailIntent.data = Uri.parse("mailto:")
+                emailIntent.type = "text/plain"
+                emailIntent.putExtra(Intent.EXTRA_EMAIL,para)
+                emailIntent.putExtra(Intent.EXTRA_CC, copia)
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT,getString(R.string.asunto,name,idImage))
+                emailIntent.putExtra(Intent.EXTRA_TEXT,getString(R.string.texto,name,idImage))
+                try {
+                    startActivity(Intent.createChooser(emailIntent, "Enviar email..."))
+                } catch (ex: ActivityNotFoundException) {
+                    Toast.makeText(context,
+                            "No tienes clientes de email instalados.", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
 
